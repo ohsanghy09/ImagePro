@@ -62,7 +62,11 @@ void CImagePro20241942Doc::Serialize(CArchive& ar)
 	}
 	else
 	{
-		// TODO: 여기에 로딩 코드를 추가합니다.
+		CFile*fp = ar.GetFile();
+		if(fp->GetLength() == 256*256)
+			ar.Read(InputImg, 256 * 256);
+		else
+			AfxMessageBox("파일 크기가 256x256이 아닙니다.");
 	}
 }
 

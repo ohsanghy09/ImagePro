@@ -59,9 +59,29 @@ void CImagePro20241942View::OnDraw(CDC* pDC) //pDC를 사용해서 화면에 그
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+	
+	int x, y;
 
+	for(y=0; y < 256; y++)
+	{
+		for(x = 0; x < 256; x++)
+		{
+			// Document 클래스의 InputImg 배열에서 픽셀 값을 읽어와서 화면에 그립니다.
+			pDC->SetPixel(x, y, RGB(pDoc->InputImg[y][x], pDoc->InputImg[y][x],  pDoc->InputImg[y][x]));
+		}
+	}
 
-	pDC->TextOutA(100, 100, "첫번째 영상처리프로그램 예제입니다."); // 화면 그리기 예제
+	for (y = 0; y < 256; y++)
+	{
+		for (x = 0; x < 256; x++)
+		{
+			// Document 클래스의 ResultImg 배열에서 픽셀 값을 읽어와서 화면에 그립니다.
+			pDC->SetPixel(256+20+x, y, RGB(pDoc->ResultImg[y][x], pDoc->ResultImg[y][x], pDoc->ResultImg[y][x]));
+		}
+	}
+
+	
+
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
@@ -72,7 +92,8 @@ void CImagePro20241942View::OnInitialUpdate()
 
 	CSize sizeTotal;
 	// TODO: 이 뷰의 전체 크기를 계산합니다.
-	sizeTotal.cx = sizeTotal.cy = 100;
+	sizeTotal.cx = 2048;
+	sizeTotal.cy = 1024;
 	SetScrollSizes(MM_TEXT, sizeTotal);
 }
 
